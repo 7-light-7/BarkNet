@@ -1,0 +1,29 @@
+version: '3.9'
+
+services:
+  app:
+    image: openjdk:21-jdk-slim  # Use an official Java runtime image
+    container_name: account-tracker
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./build/libs/tracker-0.0.1-SNAPSHOT.jar:/app/app.jar  # Ensure the path matches your JAR file name
+    working_dir: /app
+    entrypoint: ["java", "-jar", "app.jar"]
+    environment:
+      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_PORT=6379
+    depends_on:
+      - redis
+
+  redis:
+    env_file: ./.env
+    image: redis:latest
+    container_name: Tracker-redis
+    ports:
+      - "${REDIS_PORT}:${REDIS_PORT}"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  redis_data:
