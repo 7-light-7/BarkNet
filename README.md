@@ -38,9 +38,9 @@ Here I demonstrate how a Spring Boot framework can be leveraged to set up the lo
    docker-compose -f {"path to docker file"}\docker-compose.yml up -d
    ```
 4. **Launch the application**
-  ```sh
-  ./gradlew bootRun
-  ```
+   ```sh
+   ./gradlew bootRun
+   ```
 5. **To access the UI, go to your browser and navigate to:**
    ```sh
    http://localhost:8080/
