@@ -11,7 +11,7 @@ services:
     working_dir: /app
     entrypoint: ["java", "-jar", "app.jar"]
     environment:
-      - SPRING_REDIS_HOST=redis
+      - SPRING_REDIS_HOST=localhost
       - SPRING_REDIS_PORT=6379
     depends_on:
       - redis
@@ -21,7 +21,7 @@ services:
     image: redis:latest
     container_name: Tracker-redis
     ports:
-      - "${REDIS_PORT}:${REDIS_PORT}"
+      - 6379:6379
     volumes:
       - redis_data:/data
 
