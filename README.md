@@ -1,6 +1,8 @@
 # TrackerNet
 ## An enterprise application alpha
 
+Here I demonstrate how a spring-boot framework can be leveraged to set up the logic for a typical service-based Business. 
+
 ### Structure
 | Category              | Choice       |
 |-----------------------|--------------|
