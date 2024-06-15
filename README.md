@@ -46,10 +46,10 @@ Here I demonstrate how a Spring Boot framework can be leveraged to set up the lo
    http://localhost:8080/
    ```
 6. **Login as default1**
-   username:```sh
+   ```sh
    default1
    ```
-   password:```sh
+   ```sh
    password
    ```
    
