@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import alpha.net.appuser.*;
 
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -22,15 +23,26 @@ public class MessageRepositoryTest {
     private ChatRepository chatRepository;
 
     @Autowired
-    private AppUserRepository appUserRepository;
+    private AppUserService appUserService;
 
     @Test
     @Transactional
     @Rollback
     public void testFindByChat() {
         // Setup
-        AppUser user1 = appUserRepository.save(new AppUser(null,"user1", "password", null));
-        AppUser user2 = appUserRepository.save(new AppUser(null, "user2", "password",null));
+        AppUser user1 = AppUser.builder()
+                .username("user1")
+                .password("password")
+                .roles(Set.of("ROLE_USER"))
+                .build();
+        appUserService.save(user1);
+
+        AppUser user2 = AppUser.builder()
+                .username("user2")
+                .password("password")
+                .roles(Set.of("ROLE_USER"))
+                .build();
+        appUserService.save(user2);
         Chat chat = chatRepository.save(new Chat(List.of(user1, user2), List.of()));
 
         ChatMessage message1 = messageRepository.save(new ChatMessage(chat, user1, "Hello"));

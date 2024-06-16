@@ -71,6 +71,7 @@ public class MessageServiceTest {
                 .roles(Set.of("ROLE_USER"))
                 .build();
         appUserService.save(user2);
+        
         Chat chat = chatService.createChat(List.of(user1, user2));
 
         messageService.sendMessage(chat, user1, "Hello");
