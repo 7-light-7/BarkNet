@@ -1,6 +1,5 @@
 package alpha.net.chat;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import alpha.net.appuser.AppUser;
