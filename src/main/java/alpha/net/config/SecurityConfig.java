@@ -15,8 +15,6 @@ import alpha.net.appuser.CustomUserDetailsService;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {

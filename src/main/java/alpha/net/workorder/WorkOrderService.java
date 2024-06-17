@@ -20,6 +20,10 @@ public class WorkOrderService {
         return workOrderRepository.findById(id);
     }
 
+    public List<WorkOrder> findByAccountId(Long accountId) {
+        return workOrderRepository.findByAccountId(accountId);
+    }
+
     public WorkOrder save(WorkOrder workOrder) {
         return workOrderRepository.save(workOrder);
     }
