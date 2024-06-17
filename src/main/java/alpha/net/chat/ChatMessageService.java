@@ -5,7 +5,9 @@ import org.springframework.stereotype.Service;
 import alpha.net.appuser.AppUser;
 
 import java.time.LocalDateTime;
-import java.util.List;@Service
+import java.util.List;
+
+@Service
 public class ChatMessageService {
 
     private final ChatMessageRepository messageRepository;

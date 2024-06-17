@@ -16,11 +16,14 @@ public class AppUserService {
 
     private static final Logger logger = LoggerFactory.getLogger(AppUserService.class);
 
-    @Autowired
-    private AppUserRepository appuserRepository;
+    private final AppUserRepository appuserRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
+
+    public AppUserService(AppUserRepository appuserRepository, PasswordEncoder passwordEncoder) {
+        this.appuserRepository = appuserRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     public AppUser save(AppUser user) {
         logger.info("Saving user with username: {}", user.getUsername());
