@@ -9,8 +9,7 @@ Here I demonstrate how a Spring Boot framework can be leveraged to set up the lo
 | **IDE**                    | VSCode                 | 
 | **Dependency Management**  | Gradle                 | 
 | **Configuration Management** | `application.properties` |
-| **Database**               | H2                     | 
-| **NoSQL**                  | Redis                  | 
+| **Database**               | H2 & Redis                    |
 | **HTML Template**          | Thymeleaf & Bootstrap  |
 
 ### Features
