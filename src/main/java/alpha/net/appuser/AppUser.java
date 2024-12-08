@@ -1,5 +1,6 @@
 package alpha.net.appuser;
 
+import alpha.net.pet.Pet;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -31,9 +32,22 @@ public class AppUser implements UserDetails {
     @Column(unique = true)
     private String username;
 
+    private String firstName;
+    private String lastName;
+
+    @NotEmpty(message = "Email is required")
+    @Column(unique = true)
+    private String email;
+
+    @NotEmpty
+    private Integer cellPhone;
+
     @NotEmpty(message = "Password is required")
     @Size(min = 6, message = "Password must be at least 6 characters")
     private String password;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Pet> pets = new HashSet<>();
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
