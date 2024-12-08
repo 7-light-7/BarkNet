@@ -2,12 +2,12 @@ version: '3.9'
 
 services:
   app:
-    image: openjdk:21-jdk-slim  # Use an official Java runtime image
+    image: openjdk:21-jdk-slim
     container_name: account-tracker
     ports:
       - "8080:8080"
     volumes:
-      - ./build/libs/tracker-0.0.1-SNAPSHOT.jar:/app/app.jar  # Ensure the path matches your JAR file name
+      - ./build/libs/tracker-0.0.1-SNAPSHOT.jar:/app/app.jar
     working_dir: /app
     entrypoint: ["java", "-jar", "app.jar"]
     environment:
