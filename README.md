@@ -1,16 +1,16 @@
 # TrackerNet
 ## An enterprise application alpha
 
-Here I demonstrate how a Spring Boot framework can be leveraged to set up the logic for a typical service-based business.
+This project is being redesigned to represent the backend of a theoretical vet web application. Users will be able to login, view their pet's information, schedule appointments, and communicate with the vet. 
+The staff of the veternary buisness will be able to update pet information, contact owners, and monitor necessary services.
 
 ### Structure
 | Category                   | Choice                 |
 |----------------------------|------------------------|
-| **IDE**                    | VSCode                 | 
+| **IDE**                    | Intellij                | 
 | **Dependency Management**  | Gradle                 | 
 | **Configuration Management** | `application.properties` |
 | **Database**               | H2 & Redis                    |
-| **HTML Template**          | Thymeleaf & Bootstrap  |
 
 ### Features
 - **Account Management**: Create, read, update, and delete accounts.
