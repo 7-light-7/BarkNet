@@ -1,4 +1,4 @@
-# TrackerNet
+# BarkNet
 ## An enterprise application alpha
 
 This project is being redesigned to represent the backend of a theoretical vet web application. Users will be able to login, view their pet's information, schedule appointments, and communicate with the vet. 
