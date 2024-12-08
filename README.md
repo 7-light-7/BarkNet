@@ -12,12 +12,6 @@ The staff of the veternary buisness will be able to update pet information, cont
 | **Configuration Management** | `application.properties` |
 | **Database**               | H2 & Redis                    |
 
-### Features
-- **Account Management**: Create, read, update, and delete accounts.
-- **Work Order Management**: Link work orders to accounts, manage tasks, and track progress.
-- **Session Management**: Use Redis to manage sessions.
-- **Web Interface**: Use Thymeleaf and Bootstrap for the front end.
-
 ### Prerequisites
 - Java 21
 - Docker (for running Redis)
