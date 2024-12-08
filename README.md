@@ -40,7 +40,4 @@ Here I demonstrate how a Spring Boot framework can be leveraged to set up the lo
    ```sh
    ./gradlew bootRun
    ```
-   ```sh
-   password
-   ```
    
