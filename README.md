@@ -40,14 +40,6 @@ Here I demonstrate how a Spring Boot framework can be leveraged to set up the lo
    ```sh
    ./gradlew bootRun
    ```
-5. **To access the UI, go to your browser and navigate to:**
-   ```sh
-   http://localhost:8080/
-   ```
-6. **Login as default1**
-   ```sh
-   default1
-   ```
    ```sh
    password
    ```
