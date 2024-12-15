@@ -5,6 +5,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+/**
+ * DTO for filtering pets.
+ */
 @Data
 @Builder
 @NoArgsConstructor

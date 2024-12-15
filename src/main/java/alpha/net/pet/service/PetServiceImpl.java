@@ -17,6 +17,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * Documentation for the methods can be found in the PetService interface.
+ */
 @Slf4j
 @Service
 public class PetServiceImpl implements PetService {
@@ -26,6 +29,18 @@ public class PetServiceImpl implements PetService {
         this.petRepository = petRepository;
     }
 
+    /**
+     * Saves or updates a pet in the BarkNet system.
+     * If the pet has an ID, it attempts to update the existing pet.
+     * If the pet does not have an ID, it saves a new pet.
+     * 
+     * @param pet the pet entity to be persisted
+     * @return the saved or updated pet entity
+     * @throws EntityNotFoundException if the pet to be updated does not exist
+     * @throws DataIntegrityViolationException if there is a data integrity violation
+     * @throws PersistenceException if a database error occurs
+     * @throws Exception for any unexpected errors
+     */
     @Transactional
     @Override
     public Pet saveOrUpdatePet(Pet pet) throws Exception {
@@ -54,6 +69,15 @@ public class PetServiceImpl implements PetService {
         );
     }
 
+    /**
+     * Fetches a specific pet entity by their ID.
+     * 
+     * @param petId the ID of the pet to be fetched
+     * @return the pet entity with the matching ID
+     * @throws EntityNotFoundException if no pet with the given ID exists
+     * @throws PersistenceException if a database error occurs
+     * @throws Exception for any unexpected errors
+     */
     @Override
     public Pet getPetById(long petId) throws Exception {
         String logMessage = "Getting pet with id " + petId;
@@ -66,8 +90,15 @@ public class PetServiceImpl implements PetService {
         );
     }
 
-
-
+    /**
+     * Deletes a pet entity from BarkNet by their ID.
+     * 
+     * @param petId the ID of the pet to be deleted
+     * @throws EntityNotFoundException if no pet with the given ID exists
+     * @throws DataIntegrityViolationException if there is a data integrity violation during deletion
+     * @throws PersistenceException if a database error occurs
+     * @throws Exception for any unexpected errors
+     */
     @Transactional
     @Override
     public void deletePetById(long petId) throws Exception {
@@ -86,24 +117,15 @@ public class PetServiceImpl implements PetService {
         );
     }
 
-
     /**
-     * Sets the pet fields in the update case for save or update
-     * @param existingPet the existing pet in BarkNet
-     * @param newPet the new details to be persisted
-     * @return the new pet entity with the merged details
+     * Fetches all pets from BarkNet based on the provided filter criteria.
+     * 
+     * @param petFilterBodyDTO the filter criteria for fetching pets
+     * @return List of all pets matching the filter criteria
+     * @throws EntityNotFoundException if no pets match the given filters
+     * @throws PersistenceException if a database error occurs
+     * @throws Exception for any unexpected errors
      */
-    private Pet updateExistingPet(Pet existingPet, Pet newPet) {
-        existingPet.setName(newPet.getName());
-        existingPet.setSpecies(newPet.getSpecies());
-        existingPet.setSubtype(newPet.getSubtype());
-        existingPet.setWeight(newPet.getWeight());
-        existingPet.setAge(newPet.getAge());
-        existingPet.setGender(newPet.isGender());
-        existingPet.setUser(newPet.getUser());
-        return existingPet;
-    }
-
     @Override
     public List<PetListDTO> findAllPets(PetFilterBodyDTO petFilterBodyDTO) throws Exception {
         String logMessage = "Fetching all pets with filters: " +
@@ -138,6 +160,22 @@ public class PetServiceImpl implements PetService {
         );  
     }
 
-
+    /**
+     * Sets the pet fields in the update case for save or update.
+     * 
+     * @param existingPet the existing pet in BarkNet
+     * @param newPet the new details to be persisted
+     * @return the new pet entity with the merged details
+     */
+    private Pet updateExistingPet(Pet existingPet, Pet newPet) {
+        existingPet.setName(newPet.getName());
+        existingPet.setSpecies(newPet.getSpecies());
+        existingPet.setSubtype(newPet.getSubtype());
+        existingPet.setWeight(newPet.getWeight());
+        existingPet.setAge(newPet.getAge());
+        existingPet.setGender(newPet.isGender());
+        existingPet.setUser(newPet.getUser());
+        return existingPet;
+    }
 
 }
