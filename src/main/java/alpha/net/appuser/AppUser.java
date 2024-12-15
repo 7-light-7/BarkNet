@@ -51,7 +51,7 @@ public class AppUser implements UserDetails {
     private String password;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Pet> pets = new HashSet<>();
+    private final Set<Pet> pets = new HashSet<>();
 
     @ElementCollection(fetch = FetchType.EAGER)
     @Builder.Default
