@@ -1,6 +1,11 @@
-package alpha.net.pet;
+package alpha.net.pet.service;
 
+import alpha.net.pet.Pet;
+import alpha.net.pet.petDto.PetFilterBodyDTO;
+import alpha.net.pet.petDto.PetListDTO;
+import alpha.net.pet.repo.PetRepository;
 import alpha.net.utility.exception.ExceptionHandlerUtils;
+import alpha.net.utility.exception.dtoMapping.pet.PetDTOConverter;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.PersistenceException;
 import jakarta.transaction.Transactional;
@@ -8,7 +13,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -95,6 +102,40 @@ public class PetServiceImpl implements PetService {
         existingPet.setGender(newPet.isGender());
         existingPet.setUser(newPet.getUser());
         return existingPet;
+    }
+
+    @Override
+    public List<PetListDTO> findAllPets(PetFilterBodyDTO petFilterBodyDTO) throws Exception {
+        String logMessage = "Fetching all pets with filters: " +
+                            "species=" + petFilterBodyDTO.getSpecies() + ", " +
+                            "subtype=" + petFilterBodyDTO.getSubtype() + ", " +
+                            "name=" + petFilterBodyDTO.getName() + ", " +
+                            "age=" + petFilterBodyDTO.getAge() + ", " +
+                            "weight=" + petFilterBodyDTO.getWeight() + ", " +
+                            "gender=" + petFilterBodyDTO.getGender() + ", " +
+                            "ownerName=" + petFilterBodyDTO.getOwnerName();
+        log.info(logMessage);
+
+        return ExceptionHandlerUtils.handleTransactionExceptions(
+            () -> {
+                List<Pet> pets = petRepository.findByAllPetsByFilter(
+                    petFilterBodyDTO.getSpecies(),
+                    petFilterBodyDTO.getSubtype(),
+                    petFilterBodyDTO.getName(),
+                    petFilterBodyDTO.getAge(),
+                    petFilterBodyDTO.getWeight(),
+                    petFilterBodyDTO.getGender(),
+                    petFilterBodyDTO.getOwnerName()
+                ).orElseThrow(() -> new EntityNotFoundException("No pets found with the given filters"));
+                
+                return pets.stream()
+                    .map(PetDTOConverter::convertToDTO)
+                    .collect(Collectors.toList());
+            },
+            () -> new PersistenceException("Database persistence error occurred when fetching all pets"),
+            () -> new Exception("Unexpected error occurred when fetching all pets"),
+            logMessage
+        );  
     }
 
 

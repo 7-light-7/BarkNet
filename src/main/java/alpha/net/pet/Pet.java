@@ -4,13 +4,16 @@ import alpha.net.appuser.AppUser;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
 public class Pet {
 
     @Id
@@ -36,6 +39,9 @@ public class Pet {
     private boolean gender;
 
     @ManyToOne
-    @JoinColumn (name = "user_id")
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private AppUser user;
+
+    @Column(name = "user_id")
+    private Long userId;
 }

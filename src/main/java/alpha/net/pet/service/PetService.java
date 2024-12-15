@@ -1,5 +1,10 @@
-package alpha.net.pet;
+package alpha.net.pet.service;
 
+import java.util.List;
+
+import alpha.net.pet.Pet;
+import alpha.net.pet.petDto.PetFilterBodyDTO;
+import alpha.net.pet.petDto.PetListDTO;
 import jakarta.transaction.Transactional;
 
 public interface PetService {
@@ -20,6 +25,15 @@ public interface PetService {
      * @throws Exception the exception class caught by the lambda exception handler
      */
     Pet getPetById(long petId) throws Exception;
+
+
+    /**
+     * Fetches all pets from BarkNet
+     * @return List of all pets in the system
+     * @throws Exception the exception class caught by the lambda exception handler
+     */
+    List<PetListDTO> findAllPets(PetFilterBodyDTO petFilterBodyDTO) throws Exception;
+
 
     /**
      * Deletes a pet entity from BarkNet by their ID

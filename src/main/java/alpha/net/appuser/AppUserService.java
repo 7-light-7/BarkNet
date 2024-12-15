@@ -24,6 +24,12 @@ public class AppUserService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    /**
+     * Saves a user to the database
+     * 
+     * @param user The user to save
+     * @return The saved user
+     */
     public AppUser save(AppUser user) {
         logger.info("Saving user with username: {}", user.getUsername());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -32,6 +38,12 @@ public class AppUserService {
         return savedUser;
     }
 
+    /**
+     * Finds a user by their username
+     * 
+     * @param username The username to search for
+     * @return The user that has the specified username
+     */
     public AppUser findByUsername(String username) {
         logger.info("Finding user by username: {}", username);
         AppUser user = appuserRepository.findByUsername(username);
@@ -41,6 +53,12 @@ public class AppUserService {
         return user;
     }
 
+    /**
+     * Finds a user by their username, ignoring case
+     * 
+     * @param username The username to search for
+     * @return The user that has the specified username
+     */
     public Optional<AppUser> findByUsernameIgnoreCase(String username) {
         logger.info("Finding user by username (ignore case): {}", username);
         Optional<AppUser> user = appuserRepository.findByUsernameIgnoreCase(username);
@@ -50,6 +68,11 @@ public class AppUserService {
         return user;
     }
 
+    /**
+     * Finds all users
+     * 
+     * @return List of all users
+     */
     public List<AppUser> findAllUsers() {
         logger.info("Retrieving all users");
         List<AppUser> users = appuserRepository.findAll();
@@ -57,7 +80,13 @@ public class AppUserService {
         return users;
     }
 
-    public List<AppUser> findByRolesContaining(String role) {
+    /**
+     * Finds all users that have the specified role
+     * 
+     * @param role The role to search for
+     * @return List of users that have the specified role
+     */
+        public List<AppUser> findByRolesContaining(String role) {
         logger.info("Finding users with role: {}", role);
         List<AppUser> users = appuserRepository.findByRolesContaining(role);
         logger.info("Found {} users with role: {}", users.size(), role);
@@ -78,7 +107,15 @@ public class AppUserService {
         return users;
     }
 
-    public AppUser createUser(String username, String password, Set<String> roles) {
+    /**
+     * Creates a user
+     * 
+     * @param username The username to create
+     * @param password The password to create
+     * @param roles The roles to create
+     * @return The created user
+     */
+    public AppUser createUser(String username, String firstName, String lastName, String email, Integer cellPhone, String password, Set<String> roles) {
         logger.info("Creating user with username: {}", username);
         if (appuserRepository.findByUsername(username) != null) {
             logger.warn("Username already exists: {}", username);
@@ -88,6 +125,10 @@ public class AppUserService {
         AppUser newUser = AppUser.builder()
                 .username(username)
                 .password(passwordEncoder.encode(password))
+                .firstName(firstName)
+                .lastName(lastName)
+                .email(email)
+                .cellPhone(cellPhone)
                 .roles(roles)
                 .build();
         AppUser createdUser = appuserRepository.save(newUser);
@@ -95,6 +136,11 @@ public class AppUserService {
         return createdUser;
     }
 
+    /**
+     * Deletes a user by their username
+     * 
+     * @param username The username to delete
+     */
     public void deleteUserByUsername(String username) {
         logger.info("Deleting user by username: {}", username);
         if ("admin".equals(username)) {
