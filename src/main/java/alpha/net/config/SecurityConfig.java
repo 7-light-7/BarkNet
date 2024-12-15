@@ -19,14 +19,14 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final CustomAuthenticationSuccessHandler successHandler;
+    // private final CustomAuthenticationSuccessHandler successHandler;
 
-    private final CustomLogoutSuccessHandler logoutSuccessHandler;
+    // private final CustomLogoutSuccessHandler logoutSuccessHandler;
 
-    public SecurityConfig(CustomAuthenticationSuccessHandler successHandler, CustomLogoutSuccessHandler logoutSuccessHandler) {
-        this.successHandler = successHandler;
-        this.logoutSuccessHandler = logoutSuccessHandler;
-    }
+    // public SecurityConfig(CustomAuthenticationSuccessHandler successHandler, CustomLogoutSuccessHandler logoutSuccessHandler) {
+    //     this.successHandler = successHandler;
+    //     this.logoutSuccessHandler = logoutSuccessHandler;
+    // }
 
     // @Bean
     // public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
